@@ -62,5 +62,4 @@ public class SonarSweep{
         first();
         second();
     }
-    
 }
