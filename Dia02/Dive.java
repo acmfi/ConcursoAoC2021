@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Dive {
 
     public static void first(){
