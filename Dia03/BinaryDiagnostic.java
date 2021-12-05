@@ -139,13 +139,13 @@ public class BinaryDiagnostic {
             System.out.println(lifeRating);
     }
 
-        private static List<String> removeBit(List<String> listO2, int i, int b){
-            List<String> listRes = new ArrayList<>(listO2);
-            for(int j = 0; j < listO2.size(); j++){
-                Character cBit = listO2.get(j).charAt(i);
+        private static List<String> removeBit(List<String> list, int i, int b){
+            List<String> listRes = new ArrayList<>(list);
+            for(int j = 0; j < list.size(); j++){
+                Character cBit = list.get(j).charAt(i);
                 int bit = Integer.parseInt(cBit.toString());
                 if(bit == b){
-                     listRes.remove(listO2.get(j)); 
+                     listRes.remove(list.get(j)); 
                 }
             }
             return listRes;
