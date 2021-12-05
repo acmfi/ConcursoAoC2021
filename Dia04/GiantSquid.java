@@ -11,29 +11,24 @@ public class GiantSquid {
         String line = sc.nextLine();
         int intLine;
         String[] bingoNums = line.split(",");
-        //List<String> bingoNums = new ArrayList<>(nums); // Numeros aleatorios
-        //List<String[][]> bingo = new ArrayList<>(); // Lista de cartillas 
-        //String[][] board = new String[5][5]; // Cartilla
-        String[] row = new String[5];
-        int i = 0; // fila
+        int i = 0; 
         int n = 0;
-        List<List<Entry<Integer, Boolean>>> board = new ArrayList<>(); // Cartilla (lista formada por lista de columnas)
-        List<List<List<Entry<Integer, Boolean>>>> bingo = new ArrayList<>(); // Lista de cartillas
+        List<List<Entry<Integer, Boolean>>> board = new ArrayList<>();          // Cartilla (lista formada por lista de columnas)
+        List<List<List<Entry<Integer, Boolean>>>> bingo = new ArrayList<>();    // Lista de cartillas
         Entry<Integer, Boolean> numPair = null;
-        Integer num;
         Boolean winnerFound = false;
         Boolean numberFound = false;
         int score = 0;
 
-        for(int j = 0; j < 5; j++){
+        for(int j = 0; j < 5; j++){                                 //Inicializo columnas
             board.add(new ArrayList<Entry<Integer, Boolean>>());
         }
         //------------- Save sets of boards ------------//
         while(sc.hasNextInt()){
             intLine = sc.nextInt();
             numPair = new SimpleEntry<>(intLine, false);     // Inicializo el par con el numero y no marcado
-            board.get(i).add(numPair);                 // Añado el par a la cartilla
-            if(i == 4 && n == 4 ){ // Se completa una cartilla
+            board.get(i).add(numPair);                       // Añado el par a la cartilla
+            if(i == 4 && n == 4 ){                           // Se completa una cartilla
                 bingo.add(board);
                 board = new ArrayList<>();
                 for(int j = 0; j < 5; j++){
@@ -41,9 +36,9 @@ public class GiantSquid {
                 }
                 n = -1;
             } 
-            if(i == 4){                            // Cartilla completa
+            if(i == 4){                                       // Se completa una fila                        
                 i = -1;
-                n++; // Se completa una fila
+                n++; 
             }
             i++;
         }
@@ -52,14 +47,14 @@ public class GiantSquid {
         //------------- Read numbers and mark them -------------//
 
         for(int j = 0; !winnerFound && j < bingoNums.length; j++){
-            Integer number = Integer.parseInt(bingoNums[j]); // Numero a marcar
+            Integer number = Integer.parseInt(bingoNums[j]);        // Numero a marcar
             numPair = new SimpleEntry<>(number, false);
             for(int k = 0; !winnerFound && k < bingo.size(); k++){ // Para cada cartilla
                 numberFound = false;
                 board = bingo.get(k);
                 for(int col = 0; !numberFound && !winnerFound && col < board.size(); col++){ // Para cada columna
-                    int index = board.get(col).indexOf(numPair); // Busca el elemento en la columna y devuelve la pos
-                    if(index != -1){ // Existe ocurrencia en la columna
+                    int index = board.get(col).indexOf(numPair);                             // Busca el elemento en la columna y devuelve la pos
+                    if(index != -1){                                                         // Existe ocurrencia en la columna
                         numberFound = true;
                         board.get(col).get(index).setValue(true);
                         // Mirar si es cartilla ganadora (fila o columna marcadas)
