@@ -61,7 +61,7 @@ public class HydrothermalVenture {
 
     public static void second(){
         Scanner sc = new Scanner(System.in);
-        int[][] diagram = new int [1000][1000]; // diagrama
+        int[][] diagram = new int [1000][1000];
         int[] row = new int[4];
         int num;
         String line;
