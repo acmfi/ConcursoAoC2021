@@ -12,10 +12,8 @@ public class TreacheryWhales {
         Entry<Integer, Integer> prevPair = new SimpleEntry<Integer,Integer>(-1,0);
         Integer max = Collections.max(numbers); // Maxima posicion a probar 
         Integer min = Collections.min(numbers); // Minima posicion a probar
-        int lastPost = max; // Lo paso a tipo primitivo
-        int firstPos = min; // Lo paso a tipo primitivo
         int fuel = 0;
-        for(int j = firstPos; j <= lastPost; j++){ // Para cada posible posicion
+        for(int j = min; j <= max; j++){ // Para cada posible posicion
             fuel = 0;
             for(int i = 0; i < numbers.size(); i++){ // Para cada elemento de la lista
                 fuel += Math.abs(j - numbers.get(i)); // Calculo su gasto y lo acumulo 
@@ -34,11 +32,9 @@ public class TreacheryWhales {
         List<Integer> numbers = saveNumbers();
         Integer max = Collections.max(numbers); // Maxima posicion a probar 
         Integer min = Collections.min(numbers); // Minima posicion a probar
-        int lastPost = max; // Lo paso a tipo primitivo
-        int firstPos = min; // Lo paso a tipo primitivo
         int fuel = 0;
         int prevFuel = -1; // Variable en la que almaceno el gasto minimo encontrado hasta el momento
-        for(int j = firstPos; j <= lastPost; j++){ // Para cada posible posicion
+        for(int j = min; j <= max; j++){ // Para cada posible posicion
             fuel = 0;
             for(int i = 0; i < numbers.size(); i++){ // Para cada elemento de la lista
                 int iterations = Math.abs(j - numbers.get(i)); // Considero numero maximo de iteraciones la distancia entre ambos numeros
@@ -67,8 +63,8 @@ public class TreacheryWhales {
     }
     
     public static void main(String[] args){
-        first();
-        //second();
+        //first();
+        second();
     }
     
 }
