@@ -9,9 +9,54 @@ import java.util.ArrayList;
 public class TreacheryWhales {
     
     public static void first(){
+        List<Integer> numbers = saveNumbers();
+        Entry<Integer, Integer> prevPair = new SimpleEntry<Integer,Integer>(-1,0);
+        Integer max = Collections.max(numbers); // Maxima posicion a probar 
+        Integer min = Collections.min(numbers); // Minima posicion a probar
+        int lastPost = max; // Lo paso a tipo primitivo
+        int firstPos = min; // Lo paso a tipo primitivo
+        int fuel = 0;
+        Integer negative = Integer.parseInt("-1");
+        for(int j = firstPos; j <= lastPost; j++){ // Para cada posible posicion
+            fuel = 0;
+            for(int i = 0; i < numbers.size(); i++){ // Para cada elemento de la lista
+                fuel += Math.abs(j - numbers.get(i)); // Calculo su gasto y lo acumulo 
+            }
+            //------------Implementacion no necesaria para el ejercicio--------------//
+            Entry<Integer, Integer> pair = new SimpleEntry<Integer, Integer>(fuel, j);
+            if(prevPair.getKey().equals(negative) || pair.getKey() < prevPair.getKey()){
+                prevPair = pair;
+            }
+        }
+        System.out.println(prevPair.getKey());      // Fuel
+        System.out.println(prevPair.getValue());    // Posicion elegida para el alineamiento
+    }
+
+    public static void second(){
+        List<Integer> numbers = saveNumbers();
+        Integer max = Collections.max(numbers); // Maxima posicion a probar 
+        Integer min = Collections.min(numbers); // Minima posicion a probar
+        int lastPost = max; // Lo paso a tipo primitivo
+        int firstPos = min; // Lo paso a tipo primitivo
+        int fuel = 0;
+        int prevFuel = -1; // Variable en la que almaceno el gasto minimo encontrado hasta el momento
+        for(int j = firstPos; j <= lastPost; j++){ // Para cada posible posicion
+            fuel = 0;
+            for(int i = 0; i < numbers.size(); i++){ // Para cada elemento de la lista
+                int iterations = Math.abs(j - numbers.get(i)); // Considero numero maximo de iteraciones la distancia entre ambos numeros
+                for(int k = 1; k <= iterations; k++){ // El numero de la iteracion sera el numero a sumar al gasto
+                    fuel += k;
+                }
+            }
+            if(prevFuel == -1 || fuel < prevFuel){
+                prevFuel = fuel;
+            }
+        }
+        System.out.println(prevFuel); // Se imprime el gasto previo que en este caso sera el minimo
+    }
+
+    private static List<Integer> saveNumbers(){
         List<Integer> numbers = new ArrayList<Integer>();
-        Long dim = Long.parseLong("10000000000000000");
-        Entry<Long, Integer> prevPair = new SimpleEntry<Long,Integer>(dim,0);
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
         sc.close();
@@ -20,29 +65,12 @@ public class TreacheryWhales {
             Integer number = Integer.parseInt(sInitialState[i]);
             numbers.add(number);
         }
-        Integer max = Collections.max(numbers); // Maxima posicion a probar (minima 0)
-        Integer min = Collections.min(numbers);
-        int lastPost = max;
-        int firstPos = min;
-        int fuel = 0;
-        for(int j = firstPos; j <= lastPost; j++){ // Para cada elemento de la lista
-            fuel = 0;
-            for(int i = 0; i < numbers.size(); i++){
-                fuel += Math.abs(j - numbers.get(i));
-            }
-            String s = Integer.toString(fuel);
-            Long f = Long.parseLong(s);
-            Entry<Long, Integer> pair = new SimpleEntry<Long, Integer>(f, j);
-            if(pair.getKey() < prevPair.getKey()){
-                prevPair = pair;
-            }
-        }
-        System.out.println(prevPair.getKey());
-        System.out.println(prevPair.getValue());
+        return numbers;
     }
     
     public static void main(String[] args){
-        first();
+        //first();
+        second();
     }
     
 }
