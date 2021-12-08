@@ -15,7 +15,6 @@ public class TreacheryWhales {
         int lastPost = max; // Lo paso a tipo primitivo
         int firstPos = min; // Lo paso a tipo primitivo
         int fuel = 0;
-        Integer negative = Integer.parseInt("-1");
         for(int j = firstPos; j <= lastPost; j++){ // Para cada posible posicion
             fuel = 0;
             for(int i = 0; i < numbers.size(); i++){ // Para cada elemento de la lista
@@ -23,7 +22,7 @@ public class TreacheryWhales {
             }
             //------------Implementacion no necesaria para el ejercicio--------------//
             Entry<Integer, Integer> pair = new SimpleEntry<Integer, Integer>(fuel, j);
-            if(prevPair.getKey().equals(negative) || pair.getKey() < prevPair.getKey()){
+            if(prevPair.getKey().equals(-1) || pair.getKey() < prevPair.getKey()){
                 prevPair = pair;
             }
         }
@@ -68,8 +67,8 @@ public class TreacheryWhales {
     }
     
     public static void main(String[] args){
-        //first();
-        second();
+        first();
+        //second();
     }
     
 }
